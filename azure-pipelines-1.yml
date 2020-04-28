@@ -24,7 +24,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'mydockerhub'
-        repository: 'sairohitthota\currency-exchange-devops'
+        repository: 'sairohitthota/currency-exchange-devops'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: '$(tag)'
