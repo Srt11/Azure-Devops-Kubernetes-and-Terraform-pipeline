@@ -11,26 +11,38 @@ stages:
     steps:
     - bash: echo Build FirstJob
     - bash: echo $(PipelineLevelVariable)
-- stage: devdep
-  variables:
-    environment: dev
-  dependsOn: Build
-  jobs:
-  - job: devdep
-    steps:
-    - bash: echo Build $(environment)dep
-- stage: qadep
-  dependsOn: Build
-  jobs:
-  - job: qadep
-    steps:
-    - bash: echo Build qadep
-- stage: proddep
-  dependsOn: 
-  - devdep
-  - qadep
-  jobs:
-  - job: proddep
-    steps:
-    - bash: echo Build proddep
+    - bash: java -version
+    - bash: node --version
+    - bash: python --version
+    - bash: mvn -version
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: |
+          **/*..yaml
+          **/*.tf
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    
+# - stage: devdep
+#   variables:
+#     environment: dev
+#   dependsOn: Build
+#   jobs:
+#   - job: devdep
+#     steps:
+#     - bash: echo Build $(environment)dep
+# - stage: qadep
+#   dependsOn: Build
+#   jobs:
+#   - job: qadep
+#     steps:
+#     - bash: echo Build qadep
+# - stage: proddep
+#   dependsOn: 
+#   - devdep
+#   - qadep
+#   jobs:
+#   - job: proddep
+#     steps:
+#     - bash: echo Build proddep
 
