@@ -1,0 +1,28 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  jobs:
+  - job: FirstJob
+    steps:
+    - bash: echo Build FirstJob
+- stage: devdep
+  jobs:
+  - job: devdep
+    steps:
+    - bash: echo Build devdep
+- stage: qadep
+  jobs:
+  - job: qadep
+    steps:
+    - bash: echo Build qadep
+- stage: proddep
+  jobs:
+  - job: proddep
+    steps:
+    - bash: echo Build proddep
+
