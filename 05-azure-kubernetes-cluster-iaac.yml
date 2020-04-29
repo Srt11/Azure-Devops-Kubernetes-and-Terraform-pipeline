@@ -16,15 +16,7 @@ steps:
     secureFile: 'azure_rsa.pub'
 - task: TerraformCLI@0
   inputs:
-    command: 'init'
+    command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
     commandOptions: '-var client_id = $(client_id) -var client_secret = $(client_secret) -var ssh_public_key = $(publickey.secureFilePath)'
-    backendType: 'azurerm'
-    backendServiceArm: 'Azure-Resource-Manager-Service-Connection'
-    ensureBackend: true
-    backendAzureRmResourceGroupName: 'terraform-backend-rg'
-    backendAzureRmResourceGroupLocation: 'westeurope'
-    backendAzureRmStorageAccountName: 'storaagerohitxyz1'
-    backendAzureRmContainerName: 'storaagerohitcontainer'
-    backendAzureRmKey: 'kubernetes-dev.tfstate'
 
